@@ -41,7 +41,7 @@ jz      0110 llll llll llll     Jump if last value is zero          ...
 
 ---------------------------------------------------------------------------
 
-mov     1000 aaaa cccc cccc     A = C                               [OK]
+movi    1000 aaaa cccc cccc     A = C                               [OK]
 mov     1001 0001 aaaa [bbbb]   A = *B -- Load                      ...
 mov     1001 0010 [aaaa] bbbb   *A = B -- Store                     ...
 mov     1001 0011 aaaa bbbb     A = B                               [OK]
@@ -51,7 +51,7 @@ pop     1001 0101 aaaa xxxx     Remove value from stack             ...
 ---------------------------------------------------------------------------
 
 cmp     1100 xxxx aaaa bbbb     Compare A with B                    [OK]
-cmp     1110 aaaa cccc cccc     Compare A with C                    [OK]
+cmpi    1110 aaaa cccc cccc     Compare A with C                    [OK]
 
 ---------------------------------------------------------------------------
 
