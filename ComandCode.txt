@@ -1,0 +1,40 @@
+nop --> 0000 0000 0000 0000
+
+
+je  --> 0001 llll llll llll (jump if equal)
+jne --> 0011 llll llll llll (jump if not equal)
+jg  --> 0100 llll llll llll (jump if greater than)
+jge --> 0101 llll llll llll (jump if greater or equal)
+
+
+AND  --> 0010 0000 aaaa bbbb
+Sub  --> 0010 0001 aaaa bbbb
+Mult --> 0010 0010 aaaa bbbb
+Div  --> 0010 0011 aaaa bbbb
+NAND --> 0010 0100 aaaa bbbb
+RSh  --> 0010 0101 aaaa bbbb
+XNOR --> 0010 0110 aaaa bbbb
+XOR  --> 0010 1001 aaaa bbbb
+NOT  --> 0010 1010 aaaa bbbb
+NOR  --> 0010 1011 aaaa bbbb
+LSh  --> 0010 1100 aaaa bbbb
+Add  --> 0010 1101 aaaa bbbb
+Ivt  --> 0010 1110 aaaa bbbb
+OR   --> 0010 1111 aaaa bbbb
+
+
+mov --> 0110 aaaa cccc cccc
+mov --> 0000 0001 aaaa bbbb (load)
+mov --> 0000 0010 aaaa bbbb (store)
+mov --> 0000 0010 aaaa bbbb (const)
+
+
+cmp --> 0000 0011 aaaa bbbb
+
+
+call --> 1001 llll llll llll
+ret --> 1010 llll llll llll
+
+
+push --> 0000 0000 0001 bbbb
+pop  --> 0000 0000 0010 bbbb
