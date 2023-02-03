@@ -1,40 +1,62 @@
-nop --> 0000 0000 0000 0000
+Descriptions:
+aaaa = Address of an A register
+bbbb = Address of an B register
+xxxx = Will be ignored
+cccc cccc = 8 bit C constant
+llll llll llll = Label used for jumps in 12-bit code
 
+---------------------------------------------------------------------------
+inst	OpCode			Description			Implemented
+---------------------------------------------------------------------------
 
-je  --> 0001 llll llll llll (jump if equal)
-jne --> 0011 llll llll llll (jump if not equal)
-jg  --> 0100 llll llll llll (jump if greater than)
-jge --> 0101 llll llll llll (jump if greater or equal)
+nop     0000 xxxx xxxx xxxx     Does not do anything                [OK]
 
+---------------------------------------------------------------------------
 
-AND  --> 0010 0000 aaaa bbbb
-Sub  --> 0010 0001 aaaa bbbb
-Mult --> 0010 0010 aaaa bbbb
-Div  --> 0010 0011 aaaa bbbb
-NAND --> 0010 0100 aaaa bbbb
-RSh  --> 0010 0101 aaaa bbbb
-XNOR --> 0010 0110 aaaa bbbb
-XOR  --> 0010 1001 aaaa bbbb
-NOT  --> 0010 1010 aaaa bbbb
-NOR  --> 0010 1011 aaaa bbbb
-LSh  --> 0010 1100 aaaa bbbb
-Add  --> 0010 1101 aaaa bbbb
-Ivt  --> 0010 1110 aaaa bbbb
-OR   --> 0010 1111 aaaa bbbb
+AND     1111 0000 aaaa bbbb     A = A & B                           [OK]
+Sub     1111 0001 aaaa bbbb     A = A - B                           [OK]
+Mult    1111 0010 aaaa bbbb     A = A * B                           [OK]
+Div     1111 0011 aaaa bbbb     A = A / B                           [OK]
+NAND    1111 0100 aaaa bbbb     A = !(A / B)                        [OK]
+RSh     1111 0101 aaaa bbbb     A = A >> B                          [OK]
+XNOR    1111 0110 aaaa bbbb     A = !(A ^ B)                        [OK]
+inc	1111 0111 aaaa xxxx	A = A + 1			    [OK]
+dec	1111 1000 aaaa xxxx	A = A - 1			    [OK]
+XOR     1111 1001 aaaa bbbb     A = A ^ B                           [OK]
+NOT     1111 1010 aaaa bbbb     A = !A                              [OK]
+NOR     1111 1011 aaaa bbbb     A = !(A | B)                        [OK]
+LSh     1111 1100 aaaa bbbb     A = A << B                          [OK]
+Add     1111 1101 aaaa bbbb     A = A + B                           [OK]
+Ivt     1111 1110 aaaa bbbb     A = -A                              [OK]
+OR      1111 1111 aaaa bbbb     A = A | B                           [OK]
 
+---------------------------------------------------------------------------
 
-mov --> 0110 aaaa cccc cccc
-mov --> 0000 0001 aaaa bbbb (load)
-mov --> 0000 0010 aaaa bbbb (store)
-mov --> 0000 0010 aaaa bbbb (const)
+jump    0001 llll llll llll     Jump                                [OK]
+je      0010 llll llll llll     Jump if equal                       ...
+jne     0011 llll llll llll     Jump if not equal                   ...
+jg      0100 llll llll llll     Jump if greater than                ...
+jge     0101 llll llll llll     Jump if greater or equal            ...
+jz      0110 llll llll llll     Jump if last value is zero          ...
 
+---------------------------------------------------------------------------
 
-cmp --> 0000 0011 aaaa bbbb
+mov     1000 aaaa cccc cccc     A = C                               [OK]
+mov     1001 0001 aaaa [bbbb]   A = *B -- Load                      ...
+mov     1001 0010 [aaaa] bbbb   *A = B -- Store                     ...
+mov     1001 0011 aaaa bbbb     A = B                               [OK]
+push    1001 0100 aaaa xxxx     Put value A on the stack            ...
+pop     1001 0101 aaaa xxxx     Remove value from stack             ...
 
+---------------------------------------------------------------------------
 
-call --> 1001 llll llll llll
-ret --> 1010 llll llll llll
+cmp     1100 xxxx aaaa bbbb     Compare A with B                    [OK]
+cmp     1110 aaaa cccc cccc     Compare A with C                    [OK]
 
+---------------------------------------------------------------------------
 
-push --> 0000 0000 0001 bbbb
-pop  --> 0000 0000 0010 bbbb
+call    1010 llll llll llll     Call a function                     ...
+ret     1011 xxxx xxxx xxxx     Return a function                   ...
+
+---------------------------------------------------------------------------
+
