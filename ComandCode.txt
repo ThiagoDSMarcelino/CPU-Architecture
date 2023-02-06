@@ -15,13 +15,13 @@ nop     0000 xxxx xxxx xxxx     Does not do anything                [OK]
 
 AND     1111 0000 aaaa bbbb     A = A & B                           [OK]
 Sub     1111 0001 aaaa bbbb     A = A - B                           [OK]
-Mult    1111 0010 aaaa bbbb     A = A * B                           [OK]
-Div     1111 0011 aaaa bbbb     A = A / B                           [OK]
+iMult   1111 0010 aaaa bbbb     A = A * B                           [OK]
+iDiv    1111 0011 aaaa bbbb     A = A / B                           [OK]
 NAND    1111 0100 aaaa bbbb     A = !(A / B)                        [OK]
 RSh     1111 0101 aaaa bbbb     A = A >> B                          [OK]
 XNOR    1111 0110 aaaa bbbb     A = !(A ^ B)                        [OK]
-inc	1111 0111 aaaa xxxx	A = A + 1			    [OK]
-dec	1111 1000 aaaa xxxx	A = A - 1			    [OK]
+Inc	1111 0111 aaaa xxxx	A = A + 1			    [OK]
+Dec	1111 1000 aaaa xxxx	A = A - 1			    [OK]
 XOR     1111 1001 aaaa bbbb     A = A ^ B                           [OK]
 NOT     1111 1010 aaaa bbbb     A = !A                              [OK]
 NOR     1111 1011 aaaa bbbb     A = !(A | B)                        [OK]
@@ -33,11 +33,11 @@ OR      1111 1111 aaaa bbbb     A = A | B                           [OK]
 ---------------------------------------------------------------------------
 
 jump    0001 llll llll llll     Jump                                [OK]
-je      0010 llll llll llll     Jump if equal                       ...
-jne     0011 llll llll llll     Jump if not equal                   ...
-jg      0100 llll llll llll     Jump if greater than                ...
-jge     0101 llll llll llll     Jump if greater or equal            ...
-jz      0110 llll llll llll     Jump if last value is zero          ...
+je      0010 llll llll llll     Jump if equal                       [OK]
+jne     0011 llll llll llll     Jump if not equal                   [OK]
+jg      0100 llll llll llll     Jump if greater than                [OK]
+jge     0101 llll llll llll     Jump if greater or equal            [OK]
+jz      0110 llll llll llll     Jump if last value is zero          [OK]
 
 ---------------------------------------------------------------------------
 
