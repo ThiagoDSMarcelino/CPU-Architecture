@@ -42,11 +42,11 @@ jz      0110 llll llll llll     Jump if last value is zero          [OK]
 ---------------------------------------------------------------------------
 
 movi    1000 aaaa cccc cccc     A = C                               [OK]
-mov     1001 0001 aaaa [bbbb]   A = *B -- Load                      ...
-mov     1001 0010 [aaaa] bbbb   *A = B -- Store                     ...
+mov     1001 0001 aaaa [bbbb]   A = *B -- Load                      [OK]
+mov     1001 0010 [aaaa] bbbb   *A = B -- Store                     [OK]
 mov     1001 0011 aaaa bbbb     A = B                               [OK]
-push    1001 0100 aaaa xxxx     Put value A on the stack            ...
-pop     1001 0101 aaaa xxxx     Remove value from stack             ...
+push    1001 0100 aaaa xxxx     Put value A on the stack            [OK]
+pop     1001 0101 aaaa xxxx     Remove value from stack             [OK]
 
 ---------------------------------------------------------------------------
 
@@ -55,8 +55,8 @@ cmpi    1110 aaaa cccc cccc     Compare A with C                    [OK]
 
 ---------------------------------------------------------------------------
 
-call    1010 llll llll llll     Call a function                     ...
-ret     1011 xxxx xxxx xxxx     Return a function                   ...
+call    1010 llll llll llll     Call a function                     [OK]
+ret     1011 xxxx xxxx xxxx     Return a function                   [OK]
 
 ---------------------------------------------------------------------------
 
