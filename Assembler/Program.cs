@@ -22,15 +22,30 @@ StreamReader reader = null;
 
 try
 {
-    writer = new StreamWriter("memory");
-    writer.WriteLine("v2.0 raw");
+    IDictionary<string, int> labels = new Dictionary<string, int>();
     reader = new StreamReader(path);
+    int index = 0;
+
+    while (!reader.EndOfStream)
+    {
+        string line = reader.ReadLine();
+        if (line.Contains(':'))
+            labels.Add(line.Replace(":", ""), index);
+        index++;
+    }
+
+    reader = new StreamReader(path);
+    writer = new StreamWriter("memory");
+    
+    
+    writer.WriteLine("v2.0 raw");
     
     while (!reader.EndOfStream)
     {
-        string line = processLine(reader.ReadLine());
+        string line = processLine(reader.ReadLine(), labels);
         writer.Write(line);
         writer.Write(" ");
+        index++;
     }
 }
 catch (Exception ex)
@@ -43,62 +58,92 @@ finally
     writer.Close();
 }
 
-IDictionary<string, byte> commandToByte = new Dictionary<string, byte>()
+
+
+string processLine(string line, IDictionary<string, int> labels)
 {
-    {"nop",   0},
+    IDictionary<string, ushort> toShort = new Dictionary<string, ushort>()
+    {
+        {"nop",   0},
 
-    {"and",   240},
-    {"sub",   241},
-    {"iMult", 242},
-    {"iDiv",  243},
-    {"nand",  244},
-    {"rsh",   245},
-    {"xnor",  246},
-    {"inc",   247},
-    {"dec",   248},
-    {"xor",   249},
-    {"not",   250},
-    {"nor",   251},
-    {"lsh",   252},
-    {"add",   253},
-    {"ivt",   254},
-    {"or",    255},
+        {"and",   61440},
+        {"sub",   61696},
+        {"imult", 61952},
+        {"idiv",  62208},
+        {"nand",  62464},
+        {"rsh",   62720},
+        {"xnor",  62976},
+        {"inc",   63232},
+        {"dec",   63488},
+        {"xor",   63744},
+        {"not",   64000},
+        {"nor",   64256},
+        {"lsh",   64512},
+        {"add",   64768},
+        {"ivt",   65024},
+        {"or",    65280},
 
-    {"jump",  16},
-    {"je",    32},
-    {"jne",   48},
-    {"jg",    64},
-    {"jge",   80},
-    {"jz",    96},
+        {"jump",  4096},
+        {"je",    8192},
+        {"jne",   12288},
+        {"jg",    12288},
+        {"jge",   16384},
+        {"jz",    24576},
 
-    {"iMov",  128},
-    {"load",  145},
-    {"store", 146},
-    {"mov",   147},
-    {"push",  148},
-    {"pop",   149},
+        {"movconst",  32768},
+        {"load",  37120},
+        {"store", 37376},
+        {"mov",   37632},
+        {"push",  37888},
+        {"pop",   38144},
 
-    {"cmp",   192},
-    {"iCmp",  224},
+        {"cmp",   49152},
+        {"cmpconst",  57344},
 
-    {"call",  160},
-    {"ret",   176}
-};
+        {"call",  40960},
+        {"ret",   45056}
+    };
 
-string processLine(string line)
-{
-    byte[] opCode = new byte[2];
-    
+
+    ushort code = 0;
+    line = line.Trim();
+
     if (line.Contains(':'))
-        return line.Replace(':', '\0');
+        return "";
     
 
-    var sla =  Regex.Replace(line, " {2,}", " ").Split(' ');
-    Console.WriteLine(sla.Length);
-    return "Assembler.commandToByte[sla[0]].ToString()";
-}
+    string[] script =  Regex.Replace(line.Replace(',', ' '), " {2,}", " ").Split(' ');
+    bool flag = false;
+    ushort a = 0;
 
-string toHex(byte[] code)
-{
-    return "0000";
+
+    foreach (var command in script)
+    {
+        if (toShort.ContainsKey(command))
+        {
+            code = toShort[command];
+            continue;
+        }
+
+
+        if (command.Contains('$') && !flag)
+        {
+            a = ushort.Parse(command.Replace("$", ""));
+            flag = true;
+        }
+        else if (command.Contains('$') && flag)
+        {
+            code = (ushort)(code | a << 4);
+            code = (ushort)(code | ushort.Parse(command.Replace("$", "")));
+        }
+        else if (flag)
+        {
+            code = (ushort)(code | a << 8);
+            code = (ushort)(code | ushort.Parse(command));
+        }
+        else
+            code = (ushort)(code | labels[command]);
+    }
+
+    return code.ToString("x4");
 }

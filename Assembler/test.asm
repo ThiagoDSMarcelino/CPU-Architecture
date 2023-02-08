@@ -1,4 +1,4 @@
-mov     $1, 255
+movconst     $1, 255
 loop:
     inc     $0
     cmp     $0, $1

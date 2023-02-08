@@ -1,8 +1,10 @@
 {
-    "cSpell.ignoreWords": [
-        "Mult",
-        "iMult",
-        "nand",
-        "xnor"
-    ]
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:Assembler}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }
