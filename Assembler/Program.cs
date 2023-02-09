@@ -31,7 +31,8 @@ try
         string line = reader.ReadLine();
         if (line.Contains(':'))
             labels.Add(line.Replace(":", ""), index);
-        index++;
+        else
+            index++;
     }
 
     reader = new StreamReader(path);
