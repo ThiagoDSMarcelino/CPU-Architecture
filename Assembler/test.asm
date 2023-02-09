@@ -1,8 +1,4 @@
-movconst     $1, 255
-loop:
-    inc     $0
-    cmp     $0, $1
-    je      end
-    jump    loop
-end:
-    jump    end
+movconst    $0, 64
+movconst    $1, 40
+imult       $0, $0
+store       $0, $1

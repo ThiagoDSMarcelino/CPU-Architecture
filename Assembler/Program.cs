@@ -29,7 +29,9 @@ try
     while (!reader.EndOfStream)
     {
         string line = reader.ReadLine();
-        if (line.Contains(':'))
+        if (line.Contains(';'))
+            continue;
+        else if (line.Contains(':'))
             labels.Add(line.Replace(":", ""), index);
         else
             index++;
