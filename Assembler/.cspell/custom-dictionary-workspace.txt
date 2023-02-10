@@ -1,7 +1,0 @@
-# Custom Dictionary Words
-idiv
-imult
-nand
-xnor
-movconst
-cmpconst

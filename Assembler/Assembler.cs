@@ -1,55 +1,61 @@
+namespace Assembler;
+
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.IO;
-using System;
 
-public class Assembler
+public class Assembler16Bit
 {
     private IDictionary<string, ushort> opcode = new Dictionary<string, ushort>()
     {
-        {"nop",   0},
+        {"nop",       0},
 
-        {"and",   61440},
-        {"sub",   61696},
-        {"imult", 61952},
-        {"idiv",  62208},
-        {"nand",  62464},
-        {"rsh",   62720},
-        {"xnor",  62976},
-        {"inc",   63232},
-        {"dec",   63488},
-        {"xor",   63744},
-        {"not",   64000},
-        {"nor",   64256},
-        {"lsh",   64512},
-        {"add",   64768},
-        {"ivt",   65024},
-        {"or",    65280},
+        // ULA opcodes
+        {"and",       61440},
+        {"sub",       61696},
+        {"mul",       61952},
+        {"div",       62208},
+        {"nand",      62464},
+        {"rsh",       62720},
+        {"xnor",      62976},
+        {"inc",       63232},
+        {"dec",       63488},
+        {"xor",       63744},
+        {"not",       64000},
+        {"nor",       64256},
+        {"lsh",       64512},
+        {"add",       64768},
+        {"ivt",       65024},
+        {"or",        65280},
 
-        {"jump",  4096},
-        {"je",    8192},
-        {"jne",   12288},
-        {"jg",    12288},
-        {"jge",   16384},
-        {"jz",    24576},
+        // Jumps opcodes
+        {"jump",      4096},
+        {"je",        8192},
+        {"jne",       12288},
+        {"jg",        12288},
+        {"jge",       16384},
+        {"jz",        24576},
 
+        // Mov opcodes
         {"movconst",  32768},
-        {"load",  37120},
-        {"store", 37376},
-        {"mov",   37632},
-        {"push",  37888},
-        {"pop",   38144},
+        {"load",      37120},
+        {"store",     37376},
+        {"mov",       37632},
+        {"push",      37888},
+        {"pop",       38144},
 
-        {"cmp",   49152},
+        // Compare opcodes
+        {"cmp",       49152},
         {"cmpconst",  57344},
 
-        {"call",  40960},
-        {"ret",   45056}
+        // Functions opcodes
+        {"call",      40960},
+        {"ret",       45056}
     };
     public void Convert(string path)
     {
         if (!File.Exists(path))
-            throw new Exception($"{path} file does not exist.");
+            throw new FileNotFoundException();
 
         IDictionary<string, int> labels = new Dictionary<string, int>();
         StreamReader reader = new StreamReader(path);
@@ -95,8 +101,9 @@ public class Assembler
 
         string[] script =  Regex.Replace(line.Replace(',', ' '), " {2,}", " ").Split(' ');
         ushort a = 0;
-        bool isB = false,
-             hasB = script.Length > 2;
+        bool
+            isB = false,
+            hasB = script.Length > 2;
 
         foreach (var command in script)
         {
