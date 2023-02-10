@@ -1,8 +1,7 @@
 # Introduction
-This is a 16-bit CPU architecture project, along with an assembler capable of accepting the commands listed below, separated by function within the programming.
+This is a 16-Bit CPU architecture project, along with an assembler capable of accepting the commands listed below, separated by function within the programming.
 
 The assembler is capable of converting from assembly to binary or hexadecimal; to use with Logisim it is necessary to convert to hexadecimal and place it inside the ROM memory that is in the main component.
-
 
 ## OpCodes
 <details>
