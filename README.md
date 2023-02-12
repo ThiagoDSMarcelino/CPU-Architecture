@@ -20,7 +20,7 @@ The assembler is capable of converting from assembly to binary or hexadecimal; t
 | ----- | --------------------- | ---------------------------------- |
 | and   | 1111 0000 AAAA BBBB   | A = A & B                          |
 | sub   | 1111 0001 AAAA BBBB   | A = A - B                          |
-| mult  | 1111 0010 AAAA BBBB   | A = A * B (Integer Multiplication) |
+| mult  | 1111 0010 AAAA BBBB   | A = A * B                          |
 | div   | 1111 0011 AAAA BBBB   | A = A / B (Integer Division)       |
 | nand  | 1111 0100 AAAA BBBB   | A = !(A & B)                       |
 | rsh   | 1111 0101 AAAA BBBB   | A = A >> B                         |
