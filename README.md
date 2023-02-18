@@ -3,7 +3,7 @@ This is a 16-Bit CPU architecture project, along with an assembler capable of ac
 
 The assembler is capable of converting from assembly to binary or hexadecimal; to use with Logisim it is necessary to convert to hexadecimal and place it inside the ROM memory that is in the main component.
 
-## OpCodes
+# OpCodes
 <details>
 <summary>Legend</summary>
 
@@ -15,12 +15,12 @@ The assembler is capable of converting from assembly to binary or hexadecimal; t
 
 </details>
 
-### ULA
+## ULA
 | inst  |        OpCode         |           Description              |
 | ----- | --------------------- | ---------------------------------- |
 | and   | 1111 0000 AAAA BBBB   | A = A & B                          |
 | sub   | 1111 0001 AAAA BBBB   | A = A - B                          |
-| mult  | 1111 0010 AAAA BBBB   | A = A * B (Integer Multiplication) |
+| mult  | 1111 0010 AAAA BBBB   | A = A * B                          |
 | div   | 1111 0011 AAAA BBBB   | A = A / B (Integer Division)       |
 | nand  | 1111 0100 AAAA BBBB   | A = !(A & B)                       |
 | rsh   | 1111 0101 AAAA BBBB   | A = A >> B                         |
@@ -35,7 +35,7 @@ The assembler is capable of converting from assembly to binary or hexadecimal; t
 | ivt   | 1111 1110 AAAA BBBB   | A = -A                             |
 | or    | 1111 1111 AAAA BBBB   | A = A \| B                         |
 
-### Jumps
+## Jumps
 | inst  |        OpCode         |           Description              |
 | ----- | --------------------- | ---------------------------------- |
 | jump  | 0001 LLLL LLLL LLLL   | Jump                               |
@@ -45,7 +45,7 @@ The assembler is capable of converting from assembly to binary or hexadecimal; t
 | jge   | 0101 LLLL LLLL LLLL   | Jump if greater or equal           |
 | jz    | 0110 LLLL LLLL LLLL   | Jump if last value is zero         |
 
-### Movs
+## Movs
 | inst  |        OpCode         |           Description              |
 | ----- | --------------------- | ---------------------------------- |
 | movcosnt   | 1000 AAAA cccc cccc | A = C                           |
@@ -55,19 +55,19 @@ The assembler is capable of converting from assembly to binary or hexadecimal; t
 | push  | 1001 0100 AAAA XXXX   | Put value A on the stack           |
 | pop   | 1001 0101 AAAA XXXX   | Remove value from stack            |
 
-### Compare
+## Compare
 | inst  |        OpCode         |           Description              |
 | ----- | --------------------- | ---------------------------------- |
 | cmp   | 1100 XXXX AAAA BBBB   | Compare A with B                   |
 | cmpcosnt  | 1110 AAAA cccc cccc | Compare A with C                 |
 
-### Functions
+## Functions
 | inst  |        OpCode         |           Description              |
 | ----- | --------------------- | ---------------------------------- |
 | call  | 1010 LLLL LLLL LLLL   | Call a function                    |
 | ret   | 1011 XXXX XXXX XXXX   | Return a function                  |
 
-### Others
+## Others
 | inst  |        OpCode         |           Description              |
 | ----- | --------------------- | ---------------------------------- |
 | nop   | 0000 XXXX XXXX XXXX   | Does not do anything               |
