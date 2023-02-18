@@ -52,7 +52,9 @@ public class Assembler16Bit
         {"call",      40960},
         {"ret",       45056}
     };
-    public void Convert(string path)
+
+
+    public void Convert(string path, bool toBinary = false)
     {
         if (!File.Exists(path))
             throw new FileNotFoundException();
@@ -79,7 +81,7 @@ public class Assembler16Bit
         reader = new StreamReader(path);
         while (!reader.EndOfStream)
         {
-            string line = this.processLine(reader.ReadLine().Trim(), labels);
+            string line = this.processLine(reader.ReadLine().Trim(), labels, toBinary);
             
             if (line.Length == 0)
                 continue;
@@ -92,7 +94,7 @@ public class Assembler16Bit
         writer.Close();
     }
 
-    private string processLine(string line, IDictionary<string, int> labels)
+    private string processLine(string line, IDictionary<string, int> labels, bool toBinary)
     {
         if (line.Contains(';') || line.Contains(':') || line.Length == 0)
             return "";
@@ -130,6 +132,9 @@ public class Assembler16Bit
             else
                 code = (ushort)(code | labels[command]);
         }
+
+        if (toBinary)
+            return code.ToString();
 
         return code.ToString("X4");
     }
